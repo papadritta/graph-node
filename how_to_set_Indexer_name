@@ -1,0 +1,51 @@
+How to setup your Indexer name associeted with your GRT address
+
+#register a ENS domain with a MM first (Example: name.eth)
+https://app.ens.domains/name/name.eth/register
+#you have to proceed the transaction two times, close the wallet and login again and proceed second times
+
+#get your namehash from 
+https://swolfeyes.github.io/ethereum-namehash-calculator
+#You should write with name.eth suffix
+#ENS name
+name.eth
+#output
+0x95419af60496b899715eddd4a23fed7213b7c9606bb9f1bfbde17dfd6a148f02
+
+#go to ProxyContract and set the setDefaultName as following 
+https://goerli.etherscan.io/address/0x065611d3515325ae6fe14f09aee5aa2c0a1f0ca7#writeProxyContract
+
+_graphAccount - Set to your GRT account with a stake 0x3584831.........
+_nameSystem - Set to 0
+_nameIdentifier - Set to the namehash 0x95419af60496b899715eddd4a23fed7213b7c9606bb9f1bfbde17dfd6a148f02
+_name - Set to myname 
+
+#Check your name on the testnet participants/indexers
+https://testnet.thegraph.com/participants/indexers
+
+#Check your name with ENS Subgraph
+https://thegraph.com/hosted-service/subgraph/ensdomains/ens
+
+#wrire query
+{
+  domains(where: {name:"name.eth"}) {
+    id
+    name
+    labelName
+    labelhash
+  }
+}
+
+#push the triangle botton (proceed) and check the output
+{
+  "data": {
+    "domains": [
+      {
+        "id": "0x95419af60496b899715eddd4a23fed7213b7c9606bb9f1bfbde17dfd6a148f02",
+        "name": "name.eth",
+        "labelName": "name",
+        "labelhash": "0x2361458367e696363fbcc70777d07ebbd2394e89fd0adcaf147faccd1d294d60"
+      }
+    ]
+  }
+}
